@@ -47,4 +47,37 @@ public class LerArq {
             System.out.println("Erro ao abrir ou ler o arquivo: " + e.getMessage());
         }
     }
+
+    public static Grafo carregarGrafo(String caminhoArquivo) {
+        Grafo grafo = null;
+
+        try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivo))) {
+
+            //Orientação e número de vértices
+            boolean ehOrientado = leitor.readLine().equals("orientado=sim");
+            int quantidadeV = Integer.parseInt(leitor.readLine().replace("V=", ""));
+
+            //Cria a estrutura vazia do Grafo
+            grafo = new Grafo(quantidadeV, ehOrientado);
+
+            //Extrai as arestas e popula a Lista de Adjacência
+            String linhaAresta;
+            while ((linhaAresta = leitor.readLine()) != null) {
+                linhaAresta = linhaAresta.replace("(", "").replace(")", "");
+                String[] fatia = linhaAresta.split(":");
+                String[] verticeAresta = fatia[0].split(",");
+
+                int u = Integer.parseInt(verticeAresta[0]);
+                int v = Integer.parseInt(verticeAresta[1]);
+                int peso = Integer.parseInt(fatia[1]);
+
+                grafo.adicionarAresta(u, v, peso);
+            }
+
+        } catch (IOException e) {
+            System.out.println("Erro ao ler o arquivo: " + e.getMessage());
+        }
+
+        return grafo;
+    }
 }

@@ -9,14 +9,14 @@ public class LerArq {
         // Usamos o try-with-resources para garantir que o arquivo seja fechado no final
         try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivo))) {
 
-            // PASSO 1: Ler a primeira linha (Orientação)
+            // Ler a primeira linha (Orientação)
             String linhaOrientacao = leitor.readLine();
             boolean ehOrientado = false;
             if(linhaOrientacao.equals("orientado=sim")) {
                 ehOrientado = true;
             } else
                 ehOrientado = false;
-            // PASSO 2: Ler a segunda linha (Quantidade de vértices)
+            // Ler a segunda linha (Quantidade de vértices)
             String linhaVertices = leitor.readLine();
             int quantidadeV = 0;
             linhaVertices = linhaVertices.replace("V=","");
@@ -25,7 +25,7 @@ public class LerArq {
 
             // Grafo nGrafo = new Grafo(quantidadeV, ehOrientado);
 
-            // PASSO 4: Ler as arestas (da terceira linha até o fim do arquivo)
+            // Ler as arestas (da terceira linha até o fim do arquivo)
             String linhaAresta;
             while ((linhaAresta = leitor.readLine()) != null) {
                //limpa a string tirando ()
@@ -39,7 +39,7 @@ public class LerArq {
                int u = Integer.parseInt(VerticeAresta[0]);
                int v = Integer.parseInt(VerticeAresta[1]);
 
-                // PASSO 5: Adicionar a aresta no grafo
+                // Adicionar a aresta no grafo
                 // Ex: meuGrafo.adicionarAresta(u, v, peso);
             }
 

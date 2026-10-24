@@ -6,7 +6,7 @@ import java.io.IOException;
 public class LerArq {
 
     public static void carregar(String caminhoArquivo) {
-        // Usamos o try-with-resources para garantir que o arquivo seja fechado no final
+        // try-with-resources para garantir que o arquivo seja fechado no final
         try (BufferedReader leitor = new BufferedReader(new FileReader(caminhoArquivo))) {
 
             // Ler a primeira linha (Orientação)

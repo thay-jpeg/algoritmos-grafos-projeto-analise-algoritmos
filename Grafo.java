@@ -24,16 +24,17 @@ public class Grafo {
 
     // Metodo para popular o grafo
     public void adicionarAresta(int u, int v, int peso) {
-        // 1. Cria e adiciona a aresta na lista do vértice de origem (u -> v)
+        // Cria e adiciona a aresta na lista do vértice de origem (u -> v)
         adjacencias.get(u).add(new Aresta(v, peso));
         // Ordena a lista para manter a regra crescente
         Collections.sort(adjacencias.get(u));
 
-        // 2. Se o grafo não for orientado, precisa adicionar a ida e a volta (v -> u)
+        // Se o grafo não for orientado, precisa adicionar a ida e a volta (v -> u)
         if (!orientado) {
             adjacencias.get(v).add(new Aresta(u, peso));
             Collections.sort(adjacencias.get(v));
         }
+
     }
 
     // Getter para Busca
@@ -45,6 +46,9 @@ public class Grafo {
         return adjacencias.get(v);
     }
 
+    public boolean isOrientado() {
+        return orientado;
+    }
 
     // Metodo extra para ajudar a testar se a leitura deu certo
     public void imprimirGrafo() {

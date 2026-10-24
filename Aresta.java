@@ -18,7 +18,7 @@ public class Aresta implements Comparable<Aresta> {
         return peso;
     }
 
-    // Regra de comparação exigida para ordenar pelo vértice de destino de forma crescente
+    // Regra de comparação  para ordenar pelo vértice de destino  (crescente)
     @Override
     public int compareTo(Aresta outraAresta) {
         return Integer.compare(this.destino, outraAresta.destino);

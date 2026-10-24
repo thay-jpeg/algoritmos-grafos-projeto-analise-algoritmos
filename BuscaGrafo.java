@@ -9,7 +9,7 @@ public class BuscaGrafo {
         this.grafo = grafo;
     }
 
-    // --- Busca em Largura (BFS) ---
+    // BFS
     public void buscaEmLargura(int verticeInicial) {
         int numVertices = grafo.getNumVertices();
         boolean[] visitados = new boolean[numVertices];
@@ -37,7 +37,7 @@ public class BuscaGrafo {
         System.out.println();
     }
 
-    // --- Busca em Profundidade (DFS) ---
+    // DFS
     public void buscaEmProfundidade(int verticeInicial) {
         int numVertices = grafo.getNumVertices();
         boolean[] visitados = new boolean[numVertices];

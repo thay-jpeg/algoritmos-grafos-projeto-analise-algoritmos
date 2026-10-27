@@ -62,4 +62,21 @@ public class Grafo {
             System.out.println();
         }
     }
+
+    /**
+     * Gera e devolve o grafo transposto.
+     * 
+     * @return Um novo objeto Grafo representando o transposto do grafo atual.
+     */
+    public Grafo obterGrafoTransposto() {
+        Grafo grafoT = new Grafo(this.numVertices, this.orientado);
+        for (int u = 0; u < this.numVertices; u++) {
+            for (Aresta aresta : this.adjacencias.get(u)) {
+
+                //inverte a direção, de u -> v pra v -> u
+                grafoT.adicionarAresta(aresta.getDestino(), u, aresta.getPeso());
+            }
+        }
+        return grafoT;
+    }
 }

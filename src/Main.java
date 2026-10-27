@@ -1,6 +1,8 @@
 import modelo.Grafo;
 import util.LerArq;
 import algoritmos.BuscaGrafo;
+import algoritmos.OrdenacaoTopologica;
+import algoritmos.ComponenteConexa;
 import algoritmos.Dijkstra;
 import algoritmos.Kruskal;
 import java.util.Scanner;
@@ -74,14 +76,16 @@ public class Main {
                     if (!grafoAtual.isOrientado()) {
                         System.out.println("\nErro: A ordenacao topologica so pode ser aplicada a grafos orientados.");
                     } else {
-                        System.out.println("\nFuncionalidade de Ordenacao...");
+                        OrdenacaoTopologica ordTopologica = new OrdenacaoTopologica(grafoAtual);
+                        ordTopologica.executar();
                     }
                     break;
                 case 6:
                     if (!grafoAtual.isOrientado()) {
                         System.out.println("\nErro: Componentes fortemente conexas exigem grafos orientados.");
                     } else {
-                        System.out.println("\nFuncionalidade de Componentes Fortemente Conexas...");
+                        ComponenteConexa cfc = new ComponenteConexa(grafoAtual);
+                        cfc.executar();
                     }
                     break;
                 case 7:

@@ -1,6 +1,9 @@
+package util;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import modelo.Grafo;
 
 //Função de ler arquivos
 public class LerArq {

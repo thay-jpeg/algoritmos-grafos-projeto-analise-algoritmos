@@ -5,7 +5,9 @@ import java.io.IOException;
 
 import modelo.Grafo;
 
-//Função de ler arquivos
+/**
+ * Classe responsavel pela leitura e upload na memoria dos arquivos de grafo no sistema
+ */
 public class LerArq {
 
     public static void carregar(String caminhoArquivo) {

@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+/**
+ * Classe do Grafo.
+ */
 public class Grafo {
     private int numVertices;
     private boolean orientado;

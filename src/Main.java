@@ -1,5 +1,6 @@
 import modelo.Grafo;
 import util.LerArq;
+import util.DesenhoGrafo;
 import algoritmos.BuscaGrafo;
 import algoritmos.OrdenacaoTopologica;
 import algoritmos.ComponenteConexa;
@@ -59,15 +60,17 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Funcionalidade de desenho...");
+                    DesenhoGrafo.gerarImagemBase(grafoAtual, "meu_grafo.png");
+
                     break;
                 case 3:
-                    System.out.print("\nIntroduza o vertice de origem para a Busca em profundidade: ");
-                    int origemDfs = scanner.nextInt();
+                    System.out.print("\nBusca em profundidade: ");
+                    //int origemBfs = scanner.nextInt();  //busca em profundidade não precisa de origem
                     BuscaGrafo buscaDfs = new BuscaGrafo(grafoAtual);
-                    buscaDfs.buscaEmProfundidade(origemDfs);
+                    buscaDfs.buscaEmProfundidade();
                     break;
                 case 4:
-                    System.out.print("\nIntroduza o vertice de origem para a Busca em largura: ");
+                    System.out.print("\nOrigem da Busca em largura: ");
                     int origemBfs = scanner.nextInt();
                     BuscaGrafo buscaBfs = new BuscaGrafo(grafoAtual);
                     buscaBfs.buscaEmLargura(origemBfs);
@@ -91,8 +94,10 @@ public class Main {
                 case 7:
                     System.out.print("\nIntroduza o vertice de origem para o algoritmo de Dijkstra: ");
                     int origemDijkstra = scanner.nextInt();
+                    int predecessores[];
                     Dijkstra dijkstra = new Dijkstra(grafoAtual);
-                    dijkstra.executar(origemDijkstra);
+                    predecessores = dijkstra.executar(origemDijkstra);
+                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,predecessores,"caminho.png");
                     break;
                 case 8:
                     Kruskal kruskal = new Kruskal(grafoAtual);

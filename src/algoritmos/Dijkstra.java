@@ -51,8 +51,17 @@ public class Dijkstra {
      * 
      * @param verticeOrigem O vértice inicial a partir do qual as distâncias serão calculadas.
      */
-    public void executar(int verticeOrigem) {
+    public int[] executar(int verticeOrigem) {
         int numVertices = grafo.getNumVertices();
+        //Verifica todos os pesos antes de iniciar o algoritmo
+        for (int i = 0; i < numVertices; i++) {
+            for (Aresta aresta : grafo.getAdjacencias(i)) {
+                if (aresta.getPeso() < 0) {
+                    System.out.println("Erro: pesos negativos. O algoritmo de Dijkstra não roda com pesos negativos.");
+                    return null;
+                }
+            }
+        }
         int[] distancias = new int[numVertices];
         int[] predecessores = new int[numVertices];
         boolean[] visitados = new boolean[numVertices];
@@ -96,6 +105,8 @@ public class Dijkstra {
         }
 
         imprimirResultado(verticeOrigem, distancias, predecessores);
+
+        return predecessores;
     }
 
 /**

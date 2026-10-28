@@ -1,4 +1,5 @@
 package modelo;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,7 +10,7 @@ public class Grafo {
     private boolean orientado;
 
     // Lista de Adjacência: uma lista que guarda uma lista de arestas para cada vértice
-    private List<List<Aresta>> adjacencias;
+    private List<List<modelo.Aresta>> adjacencias;
 
     // Construtor
     public Grafo(int numVertices, boolean orientado) {

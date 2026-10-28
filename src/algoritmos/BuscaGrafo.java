@@ -1,4 +1,7 @@
 package algoritmos;
+
+
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -77,9 +80,9 @@ public class BuscaGrafo {
     /**
      * Executa a Busca em Profundidade (DFS) garantindo que todos os vértices sejam visitados,
      * mesmo em grafos desconexos.
-     * @param verticeInicial O vértice por onde a busca principal deve começar.
+     *
      */
-    public void buscaEmProfundidade(int verticeInicial) {
+    public void buscaEmProfundidade() {
         int numVertices = grafo.getNumVertices();
         boolean[] visitados = new boolean[numVertices];
         control = false;
@@ -87,7 +90,7 @@ public class BuscaGrafo {
         System.out.println("\nBusca em Profundidade (DFS): \n");
         
         //busca a partir do vértice inicial
-        dfsRecursivo(verticeInicial, visitados);
+        //dfsRecursivo(verticeInicial, visitados);
 
         // exploração de componentes desconexas
         for (int i = 0; i < numVertices; i++) {

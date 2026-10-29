@@ -27,7 +27,7 @@ java -cp bin Main
 
 ## Como Utilizar o Sistema
 
-Ao iniciar o programa, um menu interativo de linha de comando (CLI) será exibido. 
+Ao iniciar o programa, um menu interativo de linha de comando será exibido. 
 
 ### Formato do Arquivo de Entrada
 Antes de utilizar os algoritmos, é necessário ter um arquivo `.txt` contendo a estrutura do grafo seguindo estritamente a sintaxe abaixo:

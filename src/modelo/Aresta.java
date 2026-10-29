@@ -1,4 +1,8 @@
 package modelo;
+
+/**
+ * Classe da aresta.
+ */
 // A interface Comparable é usada para manter a lista ordenada automaticamente
 public class Aresta implements Comparable<Aresta> {
     private int destino;

@@ -94,14 +94,16 @@ public class Main {
                 case 7:
                     System.out.print("\nIntroduza o vertice de origem para o algoritmo de Dijkstra: ");
                     int origemDijkstra = scanner.nextInt();
-                    int predecessores[];
+
                     Dijkstra dijkstra = new Dijkstra(grafoAtual);
-                    predecessores = dijkstra.executar(origemDijkstra);
-                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,predecessores,"caminho.png");
+                    dijkstra.executar(origemDijkstra);
+
                     break;
                 case 8:
+                    boolean arestasDestacadas[][];
                     Kruskal kruskal = new Kruskal(grafoAtual);
-                    kruskal.executar();
+                    arestasDestacadas = kruskal.executar();
+                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,arestasDestacadas,"KruskalAGM");
                     break;
                 case 0:
                     System.out.println("A encerrar o programa...");

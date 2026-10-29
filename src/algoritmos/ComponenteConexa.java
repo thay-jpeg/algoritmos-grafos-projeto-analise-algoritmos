@@ -11,7 +11,8 @@ import java.util.Stack;
  * Classe das Componentes Fortemente Conexas
  * num grafo orientado, utilizando o algoritmo de Kosaraju
  */
-public class ComponenteConexa {
+public class
+ComponenteConexa {
     private Grafo grafo;
 
     /**
@@ -24,8 +25,9 @@ public class ComponenteConexa {
     /**
      * Executa o algoritmo de Kosaraju ordenadas por tamanho decrescente
      */
-    public void executar() {
+    public int[] executar() {
         int numVertices = grafo.getNumVertices();
+
         Stack<Integer> pilha = new Stack<>();
         boolean[] visitados = new boolean[numVertices];
 
@@ -57,12 +59,14 @@ public class ComponenteConexa {
 
         //ordena a lista de componentes por tamanho decrescente
         componentes.sort((c1, c2) -> Integer.compare(c2.size(), c1.size()));
+        int[] idComponente = new int[numVertices];
 
         System.out.println("\nComponentes Fortemente Conexas: \n");
         for (int i = 0; i < componentes.size(); i++) {
             System.out.print("Componente " + (i + 1) + ": ");
             List<Integer> comp = componentes.get(i);
             for (int j = 0; j < comp.size(); j++) {
+                idComponente[comp.get(j)] = i;
                 System.out.print(comp.get(j));
                 if (j < comp.size() - 1) {
                     System.out.print(", ");
@@ -70,6 +74,7 @@ public class ComponenteConexa {
             }
             System.out.println();
         }
+        return idComponente;
     }
 
     /**

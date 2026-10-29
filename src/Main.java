@@ -86,7 +86,9 @@ public class Main {
                         System.out.println("\nErro: Componentes fortemente conexas exigem grafos orientados.");
                     } else {
                         ComponenteConexa cfc = new ComponenteConexa(grafoAtual);
-                        cfc.executar();
+                        int[] idComponentes = cfc.executar();
+                        DesenhoGrafo.gerarImagemComponentes(grafoAtual, idComponentes, "ComponenteConexa.png");
+                        System.out.println("\nImagem gerada");
                     }
                     break;
                 case 7:

@@ -1,12 +1,13 @@
-import modelo.Grafo;
-import util.LerArq;
-import util.DesenhoGrafo;
 import algoritmos.BuscaGrafo;
-import algoritmos.OrdenacaoTopologica;
 import algoritmos.ComponenteConexa;
 import algoritmos.Dijkstra;
 import algoritmos.Kruskal;
+import algoritmos.OrdenacaoTopologica;
 import java.util.Scanner;
+import modelo.Aresta;
+import modelo.Grafo;
+import util.DesenhoGrafo;
+import util.LerArq;
 
 /**
  * Classe de execução do programa.
@@ -59,18 +60,15 @@ public class Main {
                         System.out.println("\nGrafo carregado com sucesso!");
                     break;
                 case 2:
-                    System.out.println("Funcionalidade de desenho...");
+                    System.out.println("\nFuncionalidade de desenho...");
                     DesenhoGrafo.gerarImagemBase(grafoAtual, "meu_grafo.png");
-
                     break;
                 case 3:
-                    System.out.print("\nBusca em profundidade: ");
-                    //int origemBfs = scanner.nextInt();  //busca em profundidade não precisa de origem
                     BuscaGrafo buscaDfs = new BuscaGrafo(grafoAtual);
                     buscaDfs.buscaEmProfundidade();
                     break;
                 case 4:
-                    System.out.print("\nOrigem da Busca em largura: ");
+                    System.out.print("\nOrigem da Busca em largura (BFS): ");
                     int origemBfs = scanner.nextInt();
                     BuscaGrafo buscaBfs = new BuscaGrafo(grafoAtual);
                     buscaBfs.buscaEmLargura(origemBfs);
@@ -92,18 +90,42 @@ public class Main {
                     }
                     break;
                 case 7:
+
+                    if (grafoAtual == null) {
+                    break;
+                    }
+
+                    int numVertices = grafoAtual.getNumVertices();
+                    boolean flag = false;
+
+                    for (int i = 0; i < numVertices; i++) {
+                    for (Aresta aresta : grafoAtual.getAdjacencias(i)) {
+                    if (aresta.getPeso() < 0) {
+                    flag = true;
+
+                    System.out.println("\nErro: pesos negativos. O algoritmo de Dijkstra não pode ser executado devido aos pesos negativos.");
+                        }
+                    }
+                    if(flag) break;
+                }
+                if(!flag) {
                     System.out.print("\nIntroduza o vertice de origem para o algoritmo de Dijkstra: ");
                     int origemDijkstra = scanner.nextInt();
 
+                    if(origemDijkstra < 0 || origemDijkstra >= numVertices) {
+                    System.out.println("Erro: vertice de origem invalido.");
+                    break;
+                    }
+
                     Dijkstra dijkstra = new Dijkstra(grafoAtual);
                     dijkstra.executar(origemDijkstra);
-
+                }
                     break;
                 case 8:
                     boolean arestasDestacadas[][];
                     Kruskal kruskal = new Kruskal(grafoAtual);
                     arestasDestacadas = kruskal.executar();
-                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,arestasDestacadas,"KruskalAGM");
+                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,arestasDestacadas,"KruskalAGM.png");
                     break;
                 case 0:
                     System.out.println("A encerrar o programa...");

@@ -1,9 +1,9 @@
 package util;
 
-import modelo.Aresta;
-import modelo.Grafo;
 import java.io.FileWriter;
 import java.io.IOException;
+import modelo.Aresta;
+import modelo.Grafo;
 
 public class DesenhoGrafo {
 
@@ -96,9 +96,9 @@ public class DesenhoGrafo {
             String[] comando = {"C:\\Program Files\\Graphviz\\bin\\dot.exe", "-Tpng", caminhoDot, "-o", nomeImagemPng};
             Process processo = Runtime.getRuntime().exec(comando);
             processo.waitFor();
-            System.out.println("Desenho gerado com sucesso: " + nomeImagemPng);
+            System.out.println("\nDesenho gerado com sucesso: " + nomeImagemPng);
         } catch (Exception e) {
-            System.out.println("Erro ao executar o Graphviz: " + e.getMessage());
+            System.out.println("\nErro ao executar o Graphviz: " + e.getMessage());
         }
     }
 }

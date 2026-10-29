@@ -3,7 +3,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Stack;
-
 import modelo.Aresta;
 import modelo.Grafo;
 
@@ -53,12 +52,12 @@ public class Dijkstra {
      */
     public void executar(int verticeOrigem) {
         int numVertices = grafo.getNumVertices();
-        //Verifica todos os pesos antes de iniciar o algoritmo
+        //verifica todos os pesos antes de iniciar o algoritmo
         for (int i = 0; i < numVertices; i++) {
             for (Aresta aresta : grafo.getAdjacencias(i)) {
                 if (aresta.getPeso() < 0) {
-                    System.out.println("Erro: pesos negativos. O algoritmo de Dijkstra não roda com pesos negativos.");
-                       return;
+                    System.out.println("Erro: pesos negativos. O algoritmo de Dijkstra não pode ser executado com pesos negativos.");
+                return;
                 }
             }
         }
@@ -90,10 +89,6 @@ public class Dijkstra {
             for (Aresta aresta : vizinhos) {
                 int v = aresta.getDestino();
                 int peso = aresta.getPeso();
-
-                if (peso < 0) {
-                    System.out.println("Aresta com peso negativo detectada (" + u + " -> " + v + "). Dijkstra pode falhar.");
-                }
 
                 // verifica se encontrou um caminho mais curto, se sim, atualiza a distância e o predecessor, adicionando o vizinho na fila de prioridade
                 if (!visitados[v] && distancias[u] != Integer.MAX_VALUE && (distancias[u] + peso < distancias[v])) {

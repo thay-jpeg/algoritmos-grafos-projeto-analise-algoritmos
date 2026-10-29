@@ -2,7 +2,6 @@ package algoritmos;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import modelo.Aresta;
 import modelo.Grafo;
 
@@ -85,7 +84,7 @@ public class Kruskal {
      */
     public boolean[][] executar() {
         if (grafo.isOrientado()) {
-            System.out.println("Aviso: Kruskal eh um algoritmo para Grafos NAO-orientados. Pode apresentar um resultado nao esperado caso o grafo nao for o especificado.");
+            System.out.println("\nAviso: Kruskal eh um algoritmo para Grafos NAO-orientados. Pode apresentar um resultado nao esperado caso o grafo nao for o especificado.");
         }
 
         int numVertices = grafo.getNumVertices();
@@ -149,7 +148,7 @@ public class Kruskal {
      * @param custoTotal A soma dos pesos de todas as arestas da árvore.
      */
     private void imprimirResultado(List<ArestaKruskal> agm, int custoTotal) {
-        System.out.println("\nArvore Geradora Minima Kruskral: ");
+        System.out.println("\nArvore Geradora Minima Kruskal: ");
         System.out.println("\npeso total: " + custoTotal);
         System.out.print("arestas: ");
         for (ArestaKruskal a : agm) {

@@ -105,10 +105,10 @@ public class Kruskal {
             }
         }
 
-        // ordena todas as arestas em ordem crescente de peso
+        //ordena todas as arestas em ordem crescente de peso
         Collections.sort(todasArestas);
 
-        // inicializa a união
+        //inicializa a união
         int[] pai = new int[numVertices];
         for (int i = 0; i < numVertices; i++) {
             pai[i] = i;
@@ -117,18 +117,18 @@ public class Kruskal {
         List<ArestaKruskal> arvoreGeradoraMinima = new ArrayList<>();
         int custoTotal = 0;
 
-        // percorre as arestas ordenadas e adiciona à árvore se não formar ciclo
+        //percorre as arestas ordenadas e adiciona à árvore se não formar ciclo
         for (ArestaKruskal aresta : todasArestas) {
             int raizU = encontrar(pai, aresta.u);
             int raizV = encontrar(pai, aresta.v);
 
-            // se as raízes são diferentes, os vértices estão em componentes separados
+            //se as raízes são diferentes, os vértices estão em componentes separados
             if (raizU != raizV) {
                 arvoreGeradoraMinima.add(aresta);
                 custoTotal += aresta.peso;
                 unir(pai, raizU, raizV);
 
-                // AGM com V vértices tem exatamente V - 1 arestas
+                //AGM com V vértices tem exatamente V - 1 arestas
                 if (arvoreGeradoraMinima.size() == numVertices - 1) {
                     break;
                 }

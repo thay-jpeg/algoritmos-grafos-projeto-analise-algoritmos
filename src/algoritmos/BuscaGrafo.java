@@ -61,7 +61,7 @@ public class BuscaGrafo {
         while (!fila.isEmpty()) {
             int u = fila.poll();
             
-            // controle de impressão
+            //impressão
             if (control) System.out.print(" - ");
             System.out.print(u);
             control = true;
@@ -88,9 +88,6 @@ public class BuscaGrafo {
         control = false;
 
         System.out.println("\nBusca em Profundidade (DFS): \n");
-        
-        //busca a partir do vértice inicial
-        //dfsRecursivo(verticeInicial, visitados);
 
         // exploração de componentes desconexas
         for (int i = 0; i < numVertices; i++) {
@@ -110,7 +107,7 @@ public class BuscaGrafo {
     private void dfsRecursivo(int u, boolean[] visitados) {
         visitados[u] = true;
         
-        //controle de impressão
+        //impressão
         if (control) System.out.print(" - ");
         System.out.print(u);
         control = true;

@@ -1,5 +1,4 @@
 import modelo.Grafo;
-import modelo.Aresta;
 import util.LerArq;
 import util.DesenhoGrafo;
 import algoritmos.BuscaGrafo;
@@ -55,34 +54,24 @@ public class Main {
                 case 1:
                     System.out.print("\nIntroduza o caminho do ficheiro (ex: data/grafo_teste.txt): ");
                     String caminho = scanner.nextLine();
-                    
-                    if(caminho.isEmpty()) {
-                        System.out.println("Erro: caminho do arquivo não pode ser vazio.");
-                        break;
-                    }
-
                     grafoAtual = LerArq.carregarGrafo(caminho);
                     if (grafoAtual != null)
                         System.out.println("\nGrafo carregado com sucesso!");
                     break;
                 case 2:
-                    System.out.println("\nFuncionalidade de desenho...");
+                    System.out.println("Funcionalidade de desenho...");
                     DesenhoGrafo.gerarImagemBase(grafoAtual, "meu_grafo.png");
 
                     break;
                 case 3:
+                    System.out.print("\nBusca em profundidade: ");
+                    //int origemBfs = scanner.nextInt();  //busca em profundidade não precisa de origem
                     BuscaGrafo buscaDfs = new BuscaGrafo(grafoAtual);
                     buscaDfs.buscaEmProfundidade();
                     break;
                 case 4:
                     System.out.print("\nOrigem da Busca em largura: ");
                     int origemBfs = scanner.nextInt();
-
-                    if (origemBfs < 0 || origemBfs >= grafoAtual.getNumVertices()) {
-                        System.out.println("Erro: vertice de origem invalido.");
-                        break;
-                    }
-
                     BuscaGrafo buscaBfs = new BuscaGrafo(grafoAtual);
                     buscaBfs.buscaEmLargura(origemBfs);
                     break;
@@ -103,40 +92,18 @@ public class Main {
                     }
                     break;
                 case 7:
-                    if (grafoAtual == null) {
-                        break;
-                    }
-
-                    int numVertices = grafoAtual.getNumVertices();
-                    boolean flag = false;
-
-                    for (int i = 0; i < numVertices; i++) {
-                    for (Aresta aresta : grafoAtual.getAdjacencias(i)) {
-                    if (aresta.getPeso() < 0) {
-                    flag = true;
-                    System.out.println("Erro: pesos negativos. O algoritmo de Dijkstra não pode ser executado devido aos pesos negativos.");
-                }
-            }
-            if(flag) break;
-        }
-                if(!flag) {
                     System.out.print("\nIntroduza o vertice de origem para o algoritmo de Dijkstra: ");
                     int origemDijkstra = scanner.nextInt();
 
-                    if(origemDijkstra < 0 || origemDijkstra >= numVertices) {
-                        System.out.println("Erro: vertice de origem invalido.");
-                        break;
-                    }
-
-                    int predecessores[];
                     Dijkstra dijkstra = new Dijkstra(grafoAtual);
-                    predecessores = dijkstra.executar(origemDijkstra);
-                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,predecessores,"caminho.png");
-            }
+                    dijkstra.executar(origemDijkstra);
+
                     break;
                 case 8:
+                    boolean arestasDestacadas[][];
                     Kruskal kruskal = new Kruskal(grafoAtual);
-                    kruskal.executar();
+                    arestasDestacadas = kruskal.executar();
+                    DesenhoGrafo.gerarImagemCaminho(grafoAtual,arestasDestacadas,"KruskalAGM");
                     break;
                 case 0:
                     System.out.println("A encerrar o programa...");

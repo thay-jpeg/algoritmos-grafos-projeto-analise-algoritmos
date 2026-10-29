@@ -6,7 +6,6 @@ import java.util.Stack;
 
 import modelo.Aresta;
 import modelo.Grafo;
-import util.DesenhoGrafo;
 
 /**
  * Classe responsável por executar o algoritmo de Dijkstra, que encontra os
@@ -52,8 +51,17 @@ public class Dijkstra {
      * 
      * @param verticeOrigem O vértice inicial a partir do qual as distâncias serão calculadas.
      */
-    public int[] executar(int verticeOrigem) {
+    public void executar(int verticeOrigem) {
         int numVertices = grafo.getNumVertices();
+        //Verifica todos os pesos antes de iniciar o algoritmo
+        for (int i = 0; i < numVertices; i++) {
+            for (Aresta aresta : grafo.getAdjacencias(i)) {
+                if (aresta.getPeso() < 0) {
+                    System.out.println("Erro: pesos negativos. O algoritmo de Dijkstra não roda com pesos negativos.");
+                       return;
+                }
+            }
+        }
         int[] distancias = new int[numVertices];
         int[] predecessores = new int[numVertices];
         boolean[] visitados = new boolean[numVertices];
@@ -83,6 +91,10 @@ public class Dijkstra {
                 int v = aresta.getDestino();
                 int peso = aresta.getPeso();
 
+                if (peso < 0) {
+                    System.out.println("Aresta com peso negativo detectada (" + u + " -> " + v + "). Dijkstra pode falhar.");
+                }
+
                 // verifica se encontrou um caminho mais curto, se sim, atualiza a distância e o predecessor, adicionando o vizinho na fila de prioridade
                 if (!visitados[v] && distancias[u] != Integer.MAX_VALUE && (distancias[u] + peso < distancias[v])) {
                     distancias[v] = distancias[u] + peso;
@@ -94,7 +106,7 @@ public class Dijkstra {
 
         imprimirResultado(verticeOrigem, distancias, predecessores);
 
-        return predecessores;
+
     }
 
 /**

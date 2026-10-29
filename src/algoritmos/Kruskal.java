@@ -83,7 +83,7 @@ public class Kruskal {
     /**
      * Executa o algoritmo de Kruskal e identifica as arestas que compõem a AGM.
      */
-    public void executar() {
+    public boolean[][] executar() {
         if (grafo.isOrientado()) {
             System.out.println("Aviso: Kruskal eh um algoritmo para Grafos NAO-orientados. Pode apresentar um resultado nao esperado caso o grafo nao for o especificado.");
         }
@@ -115,6 +115,7 @@ public class Kruskal {
         }
 
         List<ArestaKruskal> arvoreGeradoraMinima = new ArrayList<>();
+        boolean[][] arestasNaAGM = new boolean[numVertices][numVertices];//Desenho AGM
         int custoTotal = 0;
 
         //percorre as arestas ordenadas e adiciona à árvore se não formar ciclo
@@ -125,6 +126,8 @@ public class Kruskal {
             //se as raízes são diferentes, os vértices estão em componentes separados
             if (raizU != raizV) {
                 arvoreGeradoraMinima.add(aresta);
+                arestasNaAGM[aresta.u][aresta.v] = true;
+                arestasNaAGM[aresta.v][aresta.u] = true;
                 custoTotal += aresta.peso;
                 unir(pai, raizU, raizV);
 
@@ -136,6 +139,7 @@ public class Kruskal {
         }
 
         imprimirResultado(arvoreGeradoraMinima, custoTotal);
+        return arestasNaAGM;
     }
 
     /**

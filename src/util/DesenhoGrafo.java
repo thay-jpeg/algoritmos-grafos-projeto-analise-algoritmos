@@ -5,30 +5,27 @@ import modelo.Grafo;
 import java.io.FileWriter;
 import java.io.IOException;
 
-/**
- * Classe de execucao do algoritmo de desenho do grafico usando o Graphviz.
- */
 public class DesenhoGrafo {
 
-    // grafo Padrão
+    // Grafo Padrão
     public static void gerarImagemBase(Grafo grafo, String nomeImagemPng) {
         gerarDot(grafo, null, null, nomeImagemPng);
     }
 
-    //grafo com Caminho Destacado em Vermelho
-    public static void gerarImagemCaminho(Grafo grafo, int[] predecessores, String nomeImagemPng) {
-        gerarDot(grafo, predecessores, null, nomeImagemPng);
+    //Grafo com Caminho Destacado em Vermelho
+    public static void gerarImagemCaminho(Grafo grafo, boolean[][] arestasDestacadas, String nomeImagemPng) {
+        gerarDot(grafo, arestasDestacadas, null, nomeImagemPng);
     }
 
-    //grafo com Vértices Coloridos
+    //Grafo com Vértices Coloridos
     public static void gerarImagemComponentes(Grafo grafo, int[] idComponente, String nomeImagemPng) {
         gerarDot(grafo, null, idComponente, nomeImagemPng);
     }
 
-    // método privado central que monta o arquivo .dot com base nos parâmetros recebidos
-    private static void gerarDot(Grafo grafo, int[] predecessores, int[] idComponente, String nomeImagemPng) {
+    // Método privado central que monta o arquivo .dot com base nos parâmetros recebidos
+    private static void gerarDot(Grafo grafo, boolean[][] arestasDestacadas, int[] idComponente, String nomeImagemPng) {
 
-        // add "assets/" antes do nome gerado
+        // Adiciona "assets/" antes do nome gerado
         String caminhoDot = "assets/temp_" + System.currentTimeMillis() + ".dot";
         String caminhoPngFinal = "assets/" + nomeImagemPng;
 
@@ -61,14 +58,19 @@ public class DesenhoGrafo {
 
                     if (!grafo.isOrientado() && u > v) continue; // Evita duplicação
 
-                    // Verifica se a aresta faz parte do caminho mínimo
+                    boolean noCaminho = false;
+                    if (arestasDestacadas != null && arestasDestacadas[u][v]) {
+                        noCaminho = true;
+                    }
+
+                    /* Verifica se a aresta faz parte do caminho mínimo (Dijkstra)
                     boolean noCaminho = false;
                     if (predecessores != null) {
                         if (predecessores[v] == u || (!grafo.isOrientado() && predecessores[u] == v)) {
                             noCaminho = true;
                         }
                     }
-
+                    */
                     // Se fizer parte do caminho, fica vermelha e grossa, senão fica preta normal
                     String estiloAresta = noCaminho ? "color=\"red\", penwidth=2.5" : "color=\"black\"";
                     String conexao = grafo.isOrientado() ? "->" : "--";
